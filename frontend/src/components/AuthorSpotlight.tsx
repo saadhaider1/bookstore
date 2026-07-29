@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { api } from '../config/api'
 
 interface Author {
   id: number
@@ -12,8 +13,7 @@ export default function AuthorSpotlight() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/authors')
-      .then(res => res.json())
+    api.get('/api/authors')
       .then(data => {
         if (Array.isArray(data)) {
           setAuthors(data)

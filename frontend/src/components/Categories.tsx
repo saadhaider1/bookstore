@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { BookOpen, Heart, Briefcase, Sparkles } from 'lucide-react'
+import { api } from '../config/api'
 
 interface Category {
   id: number
@@ -21,8 +22,7 @@ export default function Categories() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/categories')
-      .then(res => res.json())
+    api.get('/api/categories')
       .then(data => {
         if (Array.isArray(data)) {
           setCategories(data)

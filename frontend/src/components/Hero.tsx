@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { api } from '../config/api'
 
 interface Book {
   id: number
@@ -15,8 +16,7 @@ export default function Hero() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/books')
-      .then(res => res.json())
+    api.get('/api/books')
       .then(data => {
         if (Array.isArray(data)) {
           setFeaturedBooks(data.slice(0, 3))
