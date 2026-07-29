@@ -52,34 +52,34 @@ export default function Hero() {
   }
 
   return (
-    <section className="bg-gradient-to-r from-amber-50 to-orange-50 py-16">
+    <section className="bg-gradient-to-r from-amber-50 to-orange-50 py-8 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Text Content */}
-          <div className="space-y-6 animate-slide-fade-up">
-            <h2 className="text-5xl font-bold text-gray-900">Find Your Next Book</h2>
-            <p className="text-lg text-gray-600">
+          <div className="space-y-4 md:space-y-6 animate-slide-fade-up order-2 md:order-1">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Find Your Next Book</h2>
+            <p className="text-sm md:text-base lg:text-lg text-gray-600">
               Discover a world where every page brings a new adventure. At Paper Haven, we curate a diverse collection of books.
             </p>
-            <Link to="/shop" className="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-block text-center btn-active-scale">
+            <Link to="/shop" className="bg-primary text-white px-6 py-3 md:px-8 rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-block text-center btn-active-scale w-full md:w-auto">
               Explore Now
             </Link>
           </div>
 
           {/* Featured Books Carousel */}
-          <div className="relative">
+          <div className="relative order-1 md:order-2">
             {featuredBooks.length > 0 ? (
-              <div className="bg-white rounded-2xl shadow-xl p-8">
-                <div className="flex items-center justify-center mb-6">
+              <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                <div className="flex items-center justify-center mb-4 md:mb-6">
                   <img
                     src={featuredBooks[currentSlide].image}
                     alt={featuredBooks[currentSlide].title}
-                    className="w-48 h-64 object-cover rounded-lg shadow-md animate-float"
+                    className="w-32 h-44 md:w-48 md:h-64 object-cover rounded-lg shadow-md animate-float"
                   />
                 </div>
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-gray-900">{featuredBooks[currentSlide].title}</h3>
-                  <p className="text-gray-600">{featuredBooks[currentSlide].author}</p>
+                  <h3 className="text-lg md:text-xl font-bold text-gray-900">{featuredBooks[currentSlide].title}</h3>
+                  <p className="text-sm md:text-base text-gray-600">{featuredBooks[currentSlide].author}</p>
                 </div>
                 
                 {/* Navigation Buttons */}
@@ -87,13 +87,13 @@ export default function Hero() {
                   onClick={prevSlide}
                   className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
                 >
-                  <ChevronLeft size={24} />
+                  <ChevronLeft size={24} className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
                 <button
                   onClick={nextSlide}
                   className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
                 >
-                  <ChevronRight size={24} />
+                  <ChevronRight size={24} className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
 
                 {/* Pagination Dots */}
@@ -110,8 +110,8 @@ export default function Hero() {
                 </div>
               </div>
             ) : (
-              <div className="bg-white rounded-2xl shadow-xl p-8 flex items-center justify-center h-64">
-                <p className="text-gray-600">No featured books available at the moment.</p>
+              <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex items-center justify-center h-48 md:h-64">
+                <p className="text-sm md:text-base text-gray-600">No featured books available at the moment.</p>
               </div>
             )}
           </div>
