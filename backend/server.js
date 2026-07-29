@@ -17,7 +17,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 // Middleware
 app.use(cors({
-  origin: ['https://bookstore-f3a9.vercel.app', 'http://localhost:5173'],
+  origin: ['https://bookstore-q94q.vercel.app', 'https://bookstore-f3a9.vercel.app', 'http://localhost:5173'],
   credentials: true
 }));
 app.use(express.json());
