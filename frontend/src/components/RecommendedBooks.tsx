@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ShoppingCart, Star } from 'lucide-react'
+import { api } from '../config/api'
 
 interface Book {
   id: number
@@ -17,8 +18,7 @@ export default function RecommendedBooks() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    fetch('/api/books')
-      .then(res => res.json())
+    api.get('/api/books')
       .then(data => {
         if (Array.isArray(data)) {
           setBooks(data.slice(3, 7))
@@ -102,14 +102,7 @@ export default function RecommendedBooks() {
                         alert('Please login to add items to cart');
                         return;
                       }
-                      fetch('/api/cart', {
-                        method: 'POST',
-                        headers: {
-                          'Content-Type': 'application/json',
-                          'Authorization': `Bearer ${token}`,
-                        },
-                        body: JSON.stringify({ bookId: book.id, quantity: 1 }),
-                      })
+                      api.post('/api/cart', { bookId: book.id, quantity: 1 }, token)
                         .then(() => {
                           window.dispatchEvent(new Event('cartUpdated'));
                           alert('Added to cart!');

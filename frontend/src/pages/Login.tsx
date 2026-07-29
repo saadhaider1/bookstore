@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, BookOpen } from 'lucide-react'
+import { api } from '../config/api'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -17,26 +18,14 @@ export default function Login() {
     setLoading(true)
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      })
+      const data = await api.post('/api/auth/login', { email, password })
 
-      const data = await response.json()
-
-      if (response.ok) {
-        // Store token and user data
-        localStorage.setItem('token', data.token)
-        localStorage.setItem('user', JSON.stringify(data.user))
-        
-        // Redirect to profile page
-        navigate('/profile')
-      } else {
-        setError(data.message || 'Login failed')
-      }
+      // Store token and user data
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('user', JSON.stringify(data.user))
+      
+      // Redirect to profile page
+      navigate('/profile')
     } catch (err) {
       setError('Network error. Please try again.')
     } finally {

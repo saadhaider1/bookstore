@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, BookOpen, Check, X } from 'lucide-react'
+import { api } from '../config/api'
 
 export default function Signup() {
   const navigate = useNavigate()
@@ -22,26 +23,14 @@ export default function Signup() {
     setLoading(true)
 
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
+      const data = await api.post('/api/auth/register', {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
       })
 
-      const data = await response.json()
-
-      if (response.ok) {
-        // Redirect to login page
-        navigate('/login')
-      } else {
-        setError(data.message || 'Registration failed')
-      }
+      // Redirect to login page
+      navigate('/login')
     } catch (err) {
       setError('Network error. Please try again.')
     } finally {
